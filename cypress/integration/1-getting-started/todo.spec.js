@@ -1,56 +1,24 @@
-/// <reference types="cypress" />
+import * as homepage from '../support/home_page';
+import * as searchpage from '../support/search_page';
+import * as facetpage from '../support/facet';
 
-describe("example to-do app", () => {
-  it("Launch the URL", () => {
-    cy.visit(
-      "https://sparklingorange.blob.core.windows.net/battleship/index.html"
-    );
-  });
 
-  it("Select position for Aircraft Carrier", () => {
-    cy.get("h2").should("have.text", "Select position for Aircraft Carrier");
-    cy.wait(1000);
-    cy.get(":nth-child(3) > :nth-child(4) > button").trigger("click");
-  });
-  it("Select direction for Aircraft Carrier", () => {
-    cy.get("h2").should("have.text", "Select direction for Aircraft Carrier");
-    cy.wait(1000);
-    cy.get(":nth-child(3) > button").trigger("click");
-  });
+describe("Verify user can able to search Noiseless Headphones and apply a discount filter", () => {
+    beforeEach(() => {
+      cy.fixture("/user_input").as("admin");
+    });
+    
+    it("Enter the Search keyword and click search button", function() {
+        cy.visit(this.admin.url);  
+        homepage.enterValue_Searchbar(this.admin.searchKeyword)  
+    })
 
-  it("Select position for Battleship", () => {
-    cy.get("h2").should("have.text", "Select position for Battleship");
-    cy.wait(1000);
-    cy.get(":nth-child(5) > :nth-child(2) > button").trigger("click");
-  });
+    it('User should verify the search landing page',function(){
+        searchpage.verifySearchResult_Msg(this.admin.searchResult_text)
+    });
 
-  it("Select direction for Battleship", () => {
-    cy.get("h2").should("have.text", "Select direction for Battleship");
-    cy.wait(1000);
-    cy.get(":nth-child(3) > :nth-child(2) > button").trigger("click");
-  });
+    it('User should able to select "50 - 60" discount facet', function(){
+         facetpage.discount_filter(this.admin.discount_facet)
+    });
 
-  it("Select position for Submarine", () => {
-    cy.get("h2").should("have.text", "Select position for Submarine");
-    cy.wait(1000);
-    cy.get(":nth-child(5) > :nth-child(8) > button").trigger("click");
-  });
-
-  it("Select direction for Submarine", () => {
-    cy.get("h2").should("have.text", "Select direction for Submarine");
-    cy.wait(1000);
-    cy.get(":nth-child(1) > :nth-child(2) > button").trigger("click");
-  });
-
-  it("Select position for Patrol", () => {
-    cy.get("h2").should("have.text", "Select position for Patrol");
-    cy.wait(1000);
-    cy.get(":nth-child(2) > :nth-child(5) > button").trigger("click");
-  });
-
-  it("Select direction for Patrol", () => {
-    cy.get("h2").should("have.text", "Select direction for Patrol");
-    cy.wait(1000);
-    cy.get(":nth-child(1) > button").trigger("click");
-  });
 });
