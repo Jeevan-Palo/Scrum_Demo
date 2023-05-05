@@ -12,7 +12,7 @@ pipeline {
         // sh 'npm ci'
         // sh "npm run test:ci:record"
         sh 'npm install'
-        sh 'npx cypress run'
+        sh '/node_modules/.bin/cypress run'
       }
     }
   }
