@@ -12,6 +12,7 @@ pipeline {
         // sh 'npm ci'
         // sh "npm run test:ci:record"
         sh 'npm install'
+        sh 'npx browserslist@latest --update-db'
         sh 'npx cypress run'
       }
     }
