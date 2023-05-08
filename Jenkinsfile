@@ -16,15 +16,4 @@ pipeline {
       }
     }
   }
-  stage('Results') {
-publishHTML([allowMissing: false,
-         alwaysLinkToLastBuild: true,
-         keepAll: true,
-         reportDir: 
-        '/var/lib/jenkins/workspace/Docs_LoadTest/target/jmeter/reports/*/',
-         reportFiles: 'index.html',
-         reportName: 'Docs Loadtest Dashboard'
-         ])
-
- }
 }
